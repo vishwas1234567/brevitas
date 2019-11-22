@@ -53,6 +53,7 @@ from brevitas.core.bit_width import BitWidthConst, BitWidthParameter, BitWidthIm
 from brevitas.core.function_wrapper import TensorClampSte, TensorClamp
 from brevitas.core.quant import IdentityQuant
 from brevitas.core.quant import QuantType, BinaryQuant, TernaryQuant, RescalingIntQuant, PrescaledIntQuant
+from brevitas.core.quant import ClampedBinaryQuant
 from brevitas.core.quant import PrescaledRestrictIntQuant
 from brevitas.core.restrict_val import RestrictValueType, FloatToIntImplType, RestrictValue
 from brevitas.core.scaling import ScalingImplType, ParameterStatsScaling, StatsInputViewShapeImpl, IntScaling
@@ -175,6 +176,9 @@ def _weight_quant_init_impl(bit_width: Optional[int],
 
         if bit_width == 1 and quant_type == QuantType.BINARY:
             tensor_quant = BinaryQuant(scaling_impl=scaling_impl)
+
+        elif bit_width == 1 and quant_type == QuantType.CLAMPED_BINARY:
+            tensor_quant = ClampedBinaryQuant(scaling_impl=scaling_impl)
 
         elif bit_width == 2 and quant_type == QuantType.TERNARY:
             tensor_quant = TernaryQuant(scaling_impl=scaling_impl, threshold=ternary_threshold)

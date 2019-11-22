@@ -162,6 +162,9 @@ class ActivationQuantProxy(QuantProxy):
                                 .format(str(scaling_impl_type)))
 
             if quant_type == QuantType.BINARY:
+                raise Exception("QuantType.BINARY not supported for activations, use QuantType.CLAMPED_BINARY")
+
+            elif quant_type == QuantType.CLAMPED_BINARY:
                 if not signed:
                     raise Exception("Binary activation supports only signed activations")
                 tensor_quant = ClampedBinaryQuant(scaling_impl=scaling_impl)

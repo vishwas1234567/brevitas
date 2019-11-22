@@ -56,6 +56,7 @@ __all__ = ['QuantType', 'BinaryQuant', 'TernaryQuant', 'RescalingIntQuant', 'Pre
 
 class QuantType(AutoName):
     BINARY = auto()
+    CLAMPED_BINARY = auto()
     TERNARY = auto()
     INT = auto()
     FP = auto()
